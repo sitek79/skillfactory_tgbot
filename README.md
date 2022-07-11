@@ -7,7 +7,26 @@
 - Добавить в файл data.sql данные для проведения тестов.
 - Убедиться в том, что все тесты проходят корректно.4
 
-
+-- https://github.com/SkillfactoryCoding/JAVA-Spring-skillfactory_bot  
 1. https://start.spring.io/
 ![img.png](img.png)  
-2. 
+2. Обращаемся к сайту ЦБР  
+-- обращаемся сюда
+http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?op=GetCursOnDate
+
+http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx
+http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL
+-- как проверить это Curl ?
+
+3. Зарегистрировать нашего бота у BotFather Телеграме и получить у него токен, который мы будем использовать.  
+
+-- добавляем зависимость
+```
+<dependency>
+<groupId>com.github.xabgesagtx</groupId>
+<artifactId>telegram-spring-boot-starter</artifactId>
+<version>0.26</version>
+</dependency>
+```
+-- pom.xml должен выглядеть так:
+https://github.com/SkillfactoryCoding/JAVA-Spring-skillfactory_bot/blob/master/pom.xml
