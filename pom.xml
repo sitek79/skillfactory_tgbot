@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -13,10 +13,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tgbot</name>
 	<description>Telegram bot</description>
+
 	<properties>
 		<java.version>17</java.version>
 		<testcontainers.version>1.17.3</testcontainers.version>
+		<base.dir>.</base.dir>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -36,9 +39,9 @@
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
 		<!-- Также для создания DTO (или Data Transfer Object, то есть объектов запросов и ответов, которые мы получаем
-		 или отдаем) нам нужны следующие зависимости. Не стоит также забывать про другую аббревиатуру
-		 DAO — Data Access Object (объекты доступа к данным), данные объекты представляют сущности нашего приложения, которые хранятся в базе:
-		-->
+         или отдаем) нам нужны следующие зависимости. Не стоит также забывать про другую аббревиатуру
+         DAO — Data Access Object (объекты доступа к данным), данные объекты представляют сущности нашего приложения, которые хранятся в базе:
+        -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -83,6 +86,26 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.11.2</version>
+		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -119,6 +142,20 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.5.1</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.github.xabgesagtx/telegram-spring-boot-starter -->
+		<dependency>
+			<groupId>com.github.xabgesagtx</groupId>
+			<artifactId>telegram-spring-boot-starter</artifactId>
+			<version>0.26</version>
+		</dependency>
+
+		<!-- -->
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots</artifactId>
+			<version>6.1.0</version>
 		</dependency>
 
 	</dependencies>
