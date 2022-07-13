@@ -21,10 +21,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Service //Данный класс является сервисом
-@Slf4j //Подключаем логирование из Lombok'a
+@Service
+@Slf4j
 @RequiredArgsConstructor
 public class BotService extends TelegramLongPollingBot {
+
     private static final String CURRENT_RATES = "/currentrates";
     private static final String ADD_INCOME = "/addincome";
     private static final String ADD_SPEND = "/addspend";
@@ -33,15 +34,14 @@ public class BotService extends TelegramLongPollingBot {
     private final FinanceService financeService;
     private final ActiveChatRepository activeChatRepository;
 
-    @Value("${bot.api.key}") //Сюда будет вставлено значение из application.properties, в котором будет указан api key, полученный от BotFather
+    @Value("${bot.api.key}")
     private String apiKey;
 
-    @Value("${bot.name}") //Как будут звать нашего бота
+    @Value("${bot.name}")
     private String name;
 
     private Map<Long, List<String>> previousCommands = new ConcurrentHashMap<>();
 
-    //Это основной метод, который связан с обработкой сообщений
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
@@ -68,12 +68,11 @@ public class BotService extends TelegramLongPollingBot {
                 activeChat.setChatId(chatId);
                 activeChatRepository.save(activeChat);
             }
-            //} catch (TelegramApiException e) {
-            //  e.printStackTrace();
         } catch (Exception e) {
             log.error("Возникла неизвестная проблема, сообщите пожалуйста администратору", e);
         }
     }
+
 
     public void sendNotificationToAllActiveChats(String message, Set<Long> chatIds) {
         for (Long id : chatIds) {
@@ -83,23 +82,21 @@ public class BotService extends TelegramLongPollingBot {
             try {
                 execute(sendMessage);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                log.error("Не удалось отправить сообщение", e);
             }
         }
     }
 
-    //Данный метод будет вызван сразу после того, как данный бин будет создан - это обеспечено аннотацией Spring PostConstruct
     @PostConstruct
     public void start() {
         log.info("username: {}, token: {}", name, apiKey);
     }
 
-    //Данный метод просто возвращает данные о имени бота и его необходимо переопределять
     @Override
     public String getBotUsername() {
         return name;
     }
-    //Данный метод возвращает API ключ для взаимодействия с Telegram
+
     @Override
     public String getBotToken() {
         return apiKey;
